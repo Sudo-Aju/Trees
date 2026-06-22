@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Knoledge Tree</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    background:#87CEEB;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+canvas{
+    position:fixed;
+    inset:0;
+}
+
+h1{
+    position:absolute;
+    top:40px;
+    width:100%;
+    text-align:center;
+    color:#fff;
+    font-size:52px;
+    font-weight:700;
+    z-index:10;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Knoledge Tree</h1>
+
+<canvas id="bg"></canvas>
+
+<script type="module">
+
+import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
+
+const scn=new THREE.Scene();
+
+scn.background=new THREE.Color(0x87CEEB);
+
+const cam=new THREE.PerspectiveCamera(
+75,
+window.innerWidth/window.innerHeight,
+0.1,
+1000
+);
+
+cam.position.set(0,10,35);
+
+const rndr=new THREE.WebGLRenderer({
+canvas:document.querySelector("#bg"),
+antialias:true
+});
+
+rndr.setSize(
+window.innerWidth,
+window.innerHeight
+);
+
+rndr.setPixelRatio(
+window.devicePixelRatio
+);
+
+const ambLt=new THREE.AmbientLight(
+0xffffff,
+1.2
+);
+
+scn.add(ambLt);
+
+const sunLt=new THREE.DirectionalLight(0xffffff,2.5);
+
+sunLt.position.set(20,30,20);
+
+scn.add(sunLt);
+
+const grnd=new THREE.Mesh(
+
+new THREE.PlaneGeometry(300,300),
+
+new THREE.MeshStandardMaterial({
+
+color:0x4CAF50
+
+})
+
+);
+
+grnd.rotation.x=-Math.PI/2;
+grnd.position.y=-5;
+
+scn.add(grnd);
+
+const sun=new THREE.Mesh(
+new THREE.SphereGeometry(4,32,32),
+
+new THREE.MeshBasicMaterial({
+color:0xFFD54F
+})
+);
+
+sun.position.set(-30,25,-60);
+
+scn.add(sun);
+
+function mkCld(x,y,z){
+const cld=new THREE.Group();
+const mat=new THREE.MeshStandardMaterial({
+
+color:0xffffff
+
+});
+
+for(let i=0;i<5;i++){
+
+const geo=new THREE.SphereGeometry(
+2+Math.random()*0.5,24,24);
+
+const sph=new THREE.Mesh(geo,mat);
+
+sph.position.set(
+i*1.8,
+Math.random()*0.35,
+0
+);
+cld.add(sph);
+}
+
+cld.position.set(x,y,z);
+
+scn.add(cld);
+return cld;
+}
+
+const c1=mkCld(-40,16,-40);
+const c2=mkCld(5,22,-60);
+const c3=mkCld(35,18,-50);
+function anim(){
+
+    requestAnimationFrame(anim);
+
+    c1.position.x += 0.010;
+    c2.position.x += 0.007;
+    c3.position.x += 0.005;
+
+    if(c1.position.x > 45) c1.position.x = -45;
+    if(c2.position.x > 45) c2.position.x = -45;
+    if(c3.position.x > 45) c3.position.x = -45;
+
+    rndr.render(scn,cam);
+
+}
+
+anim();
+
+window.addEventListener("resize",()=>{
+
+    cam.aspect = window.innerWidth/window.innerHeight;
+
+    cam.updateProjectionMatrix();
+
+    rndr.setSize(
+        window.innerWidth,
+        window.innerHeight
+    );
+
+    rndr.setPixelRatio(
+        window.devicePixelRatio
+    );
+
+});
+</script></body></html>
