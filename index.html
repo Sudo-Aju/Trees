@@ -19,24 +19,14 @@
 body{
     overflow-x:hidden;
     background:#87CEEB;
-    font-family:Arial,Helvetica,sans-serif;
     color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 canvas{
     position:fixed;
     inset:0;
     z-index:-1;
-}
-
-h1{
-    position:absolute;
-    top:40px;
-    width:100%;
-    text-align:center;
-    color:#fff;
-    font-size:52px;
-    font-weight:700;
 }
 
 main{
@@ -47,7 +37,7 @@ main{
     padding:180px 0;
 }
 
-section{
+header{
     grid-column:2/span 5;
     background:#111;
     border:1px solid #444;
@@ -55,18 +45,16 @@ section{
     margin-bottom:350px;
 }
 
+section{
+    grid-column:2/span 6;
+    background:#111;
+    border:1px solid #444;
+    padding:30px;
+    margin-bottom:350px;
+}
+
 .left{
-    grid-column:7/span 4;
-}
-
-section h2{
-    font-size:28px;
-    margin-bottom:18px;
-}
-
-section p{
-    font-size:18px;
-    line-height:1.8;
+    grid-column:6/span 5;
 }
 
 footer{
@@ -75,12 +63,33 @@ footer{
     margin-bottom:250px;
 }
 
+h1{
+    font-size:52px;
+    margin-bottom:20px;
+}
+
+h2{
+    margin-bottom:18px;
+}
+
+p{
+    font-size:18px;
+    line-height:1.8;
+}
+
 @media(max-width:900px){
 
+header,
 section,
 .left{
 
 grid-column:2/span 10;
+
+}
+
+h1{
+
+font-size:40px;
 
 }
 
@@ -92,11 +101,22 @@ grid-column:2/span 10;
 
 <body>
 
-<h1>Knowledge Tree</h1>
-
 <canvas id="bg"></canvas>
 
 <main>
+
+<header>
+
+<h1>knowledge tree</h1>
+
+<p>
+
+knowledge grows like a tree. every generation builds upon the ideas that
+came before it. every discovery becomes part of something much bigger.
+
+</p>
+
+</header>
 
 <section>
 
@@ -104,9 +124,8 @@ grid-column:2/span 10;
 
 <p>
 
-every civilisation starts by asking questions. books stories and shared
-knowledge became the roots that support every new discovery. without
-these foundations the tree could never begin to grow.
+every civilisation starts by asking questions. books and stories become
+the roots of every new discovery.
 
 </p>
 
@@ -118,9 +137,8 @@ these foundations the tree could never begin to grow.
 
 <p>
 
-history carries knowledge from one generation to another. every success
-and every mistake helps strengthen the trunk and supports everything
-that grows above it.
+history keeps knowledge alive and supports everything that grows above
+it.
 
 </p>
 
@@ -132,9 +150,8 @@ that grows above it.
 
 <p>
 
-knowledge spreads into science maths engineering medicine and art. each
-branch grows in a different direction but they all remain connected to
-the same foundation.
+science maths engineering medicine and art all grow from the same
+foundation.
 
 </p>
 
@@ -146,8 +163,7 @@ the same foundation.
 
 <p>
 
-every leaf represents a new idea. together they allow humanity to keep
-learning and help the tree continue growing into the future.
+every new idea helps the tree continue growing.
 
 </p>
 
@@ -201,7 +217,9 @@ const ambLt=new THREE.AmbientLight(
 1.2
 );
 
-scn.add(ambLt);
+scn.add(
+ambLt
+);
 
 const sunLt=new THREE.DirectionalLight(
 0xffffff,
@@ -214,7 +232,9 @@ sunLt.position.set(
 20
 );
 
-scn.add(sunLt);
+scn.add(
+sunLt
+);
 
 const grnd=new THREE.Mesh(
 
@@ -224,7 +244,9 @@ new THREE.PlaneGeometry(
 ),
 
 new THREE.MeshStandardMaterial({
+
 color:0x4CAF50
+
 })
 
 );
@@ -232,7 +254,32 @@ color:0x4CAF50
 grnd.rotation.x=-Math.PI/2;
 grnd.position.y=-5;
 
-scn.add(grnd);
+scn.add(
+grnd
+);
+
+const hill=new THREE.Mesh(
+
+new THREE.CylinderGeometry(
+16,
+20,
+3,
+48
+),
+
+new THREE.MeshStandardMaterial({
+
+color:0x5B9B45
+
+})
+
+);
+
+hill.position.y=-3.5;
+
+scn.add(
+hill
+);
 
 const sun=new THREE.Mesh(
 
@@ -243,7 +290,9 @@ new THREE.SphereGeometry(
 ),
 
 new THREE.MeshBasicMaterial({
+
 color:0xFFD54F
+
 })
 
 );
@@ -254,28 +303,31 @@ sun.position.set(
 -60
 );
 
-scn.add(sun);
+scn.add(
+sun
+);
 
 function mkCld(x,y,z){
 
 const cld=new THREE.Group();
 
 const mat=new THREE.MeshStandardMaterial({
+
 color:0xffffff
+
 });
 
 for(let i=0;i<5;i++){
 
-const sph=new THREE.Mesh(
-
-new THREE.SphereGeometry(
+const geo=new THREE.SphereGeometry(
 2+Math.random()*0.5,
 24,
 24
-),
+);
 
+const sph=new THREE.Mesh(
+geo,
 mat
-
 );
 
 sph.position.set(
@@ -284,21 +336,149 @@ Math.random()*0.35,
 0
 );
 
-cld.add(sph);
+cld.add(
+sph
+);
 
 }
 
-cld.position.set(x,y,z);
+cld.position.set(
+x,
+y,
+z
+);
 
-scn.add(cld);
+scn.add(
+cld
+);
 
 return cld;
 
 }
 
-const c1=mkCld(-40,16,-40);
-const c2=mkCld(5,22,-60);
-const c3=mkCld(35,18,-50);
+const c1=mkCld(
+-40,
+16,
+-40
+);
+
+const c2=mkCld(
+5,
+22,
+-60
+);
+
+const c3=mkCld(
+35,
+18,
+-50
+);
+
+const tree=new THREE.Group();
+
+const trunk=new THREE.Mesh(
+
+new THREE.CylinderGeometry(
+1.4,
+1.8,
+14,
+24
+),
+
+new THREE.MeshStandardMaterial({
+
+color:0x6B4F2A
+
+})
+
+);
+
+trunk.position.y=4;
+
+tree.add(
+trunk
+);
+
+for(let i=0;i<6;i++){
+
+const root=new THREE.Mesh(
+
+new THREE.CylinderGeometry(
+0.18,
+0.45,
+5,
+12
+),
+
+new THREE.MeshStandardMaterial({
+
+color:0x6B4F2A
+
+})
+
+);
+
+root.position.y=-2;
+
+root.rotation.z=-1.2+i*0.45;
+
+tree.add(
+root
+);
+
+}
+
+const tex=new THREE.TextureLoader().load(
+
+"https://threejs.org/examples/textures/hardwood2_diffuse.jpg"
+
+);
+
+for(let i=0;i<4;i++){
+
+const book=new THREE.Mesh(
+
+new THREE.BoxGeometry(
+1.6,
+0.4,
+2
+),
+
+new THREE.MeshStandardMaterial({
+
+map:tex,
+
+color:0x8B5A2B
+
+})
+
+);
+
+const ang=i*Math.PI/2;
+
+book.position.set(
+Math.cos(ang)*3,
+-3.2,
+Math.sin(ang)*3
+);
+
+book.rotation.y=ang;
+
+tree.add(
+book
+);
+
+}
+
+tree.position.set(
+0,
+0,
+0
+);
+
+scn.add(
+tree
+);
 
 function mvCam(){
 
@@ -316,46 +496,76 @@ mvCam();
 
 function anim(){
 
-requestAnimationFrame(anim);
+requestAnimationFrame(
+anim
+);
 
 c1.position.x+=0.010;
 c2.position.x+=0.007;
 c3.position.x+=0.005;
 
 if(c1.position.x>45){
+
 c1.position.x=-45;
+
 }
 
 if(c2.position.x>45){
+
 c2.position.x=-45;
+
 }
 
 if(c3.position.x>45){
+
 c3.position.x=-45;
+
 }
 
-rndr.render(scn,cam);
+tree.rotation.z=Math.sin(
+Date.now()*0.001
+)*0.02;
+
+sun.rotation.y+=0.002;
+
+rndr.render(
+scn,
+cam
+);
 
 }
 
 anim();
 
-window.addEventListener("resize",()=>{
+window.addEventListener(
 
-cam.aspect=window.innerWidth/window.innerHeight;
+"resize",
+
+()=>{
+
+cam.aspect=
+window.innerWidth/
+window.innerHeight;
 
 cam.updateProjectionMatrix();
 
 rndr.setSize(
+
 window.innerWidth,
+
 window.innerHeight
+
 );
 
 rndr.setPixelRatio(
+
 window.devicePixelRatio
+
 );
 
-});
+}
+
+);
 
 </script>
 
