@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Knoledge Tree</title>
+<title>Knowledge Tree</title>
 
 <style>
 
@@ -17,14 +17,16 @@
 }
 
 body{
-    overflow:hidden;
+    overflow-x:hidden;
     background:#87CEEB;
     font-family:Arial,Helvetica,sans-serif;
+    color:#fff;
 }
 
 canvas{
     position:fixed;
     inset:0;
+    z-index:-1;
 }
 
 h1{
@@ -35,7 +37,53 @@ h1{
     color:#fff;
     font-size:52px;
     font-weight:700;
-    z-index:10;
+}
+
+main{
+    position:absolute;
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    padding:180px 0;
+}
+
+section{
+    grid-column:2/span 5;
+    background:#111;
+    border:1px solid #444;
+    padding:30px;
+    margin-bottom:350px;
+}
+
+.left{
+    grid-column:7/span 4;
+}
+
+section h2{
+    font-size:28px;
+    margin-bottom:18px;
+}
+
+section p{
+    font-size:18px;
+    line-height:1.8;
+}
+
+footer{
+    grid-column:2/span 10;
+    text-align:center;
+    margin-bottom:250px;
+}
+
+@media(max-width:900px){
+
+section,
+.left{
+
+grid-column:2/span 10;
+
+}
+
 }
 
 </style>
@@ -44,9 +92,78 @@ h1{
 
 <body>
 
-<h1>Knoledge Tree</h1>
+<h1>Knowledge Tree</h1>
 
 <canvas id="bg"></canvas>
+
+<main>
+
+<section>
+
+<h2>the roots.</h2>
+
+<p>
+
+every civilisation starts by asking questions. books stories and shared
+knowledge became the roots that support every new discovery. without
+these foundations the tree could never begin to grow.
+
+</p>
+
+</section>
+
+<section class="left">
+
+<h2>the trunk.</h2>
+
+<p>
+
+history carries knowledge from one generation to another. every success
+and every mistake helps strengthen the trunk and supports everything
+that grows above it.
+
+</p>
+
+</section>
+
+<section>
+
+<h2>the branches.</h2>
+
+<p>
+
+knowledge spreads into science maths engineering medicine and art. each
+branch grows in a different direction but they all remain connected to
+the same foundation.
+
+</p>
+
+</section>
+
+<section class="left">
+
+<h2>the leaves.</h2>
+
+<p>
+
+every leaf represents a new idea. together they allow humanity to keep
+learning and help the tree continue growing into the future.
+
+</p>
+
+</section>
+
+<footer>
+
+<p>
+
+the tree never stops growing.
+
+</p>
+
+</footer>
+
+</main>
 
 <script type="module">
 
@@ -86,20 +203,28 @@ const ambLt=new THREE.AmbientLight(
 
 scn.add(ambLt);
 
-const sunLt=new THREE.DirectionalLight(0xffffff,2.5);
+const sunLt=new THREE.DirectionalLight(
+0xffffff,
+2.5
+);
 
-sunLt.position.set(20,30,20);
+sunLt.position.set(
+20,
+30,
+20
+);
 
 scn.add(sunLt);
 
 const grnd=new THREE.Mesh(
 
-new THREE.PlaneGeometry(300,300),
+new THREE.PlaneGeometry(
+300,
+300
+),
 
 new THREE.MeshStandardMaterial({
-
 color:0x4CAF50
-
 })
 
 );
@@ -110,62 +235,106 @@ grnd.position.y=-5;
 scn.add(grnd);
 
 const sun=new THREE.Mesh(
-new THREE.SphereGeometry(4,32,32),
+
+new THREE.SphereGeometry(
+4,
+32,
+32
+),
 
 new THREE.MeshBasicMaterial({
 color:0xFFD54F
 })
+
 );
 
-sun.position.set(-30,25,-60);
+sun.position.set(
+-30,
+25,
+-60
+);
 
 scn.add(sun);
 
 function mkCld(x,y,z){
+
 const cld=new THREE.Group();
+
 const mat=new THREE.MeshStandardMaterial({
-
 color:0xffffff
-
 });
 
 for(let i=0;i<5;i++){
 
-const geo=new THREE.SphereGeometry(
-2+Math.random()*0.5,24,24);
+const sph=new THREE.Mesh(
 
-const sph=new THREE.Mesh(geo,mat);
+new THREE.SphereGeometry(
+2+Math.random()*0.5,
+24,
+24
+),
+
+mat
+
+);
 
 sph.position.set(
 i*1.8,
 Math.random()*0.35,
 0
 );
+
 cld.add(sph);
+
 }
 
 cld.position.set(x,y,z);
 
 scn.add(cld);
+
 return cld;
+
 }
 
 const c1=mkCld(-40,16,-40);
 const c2=mkCld(5,22,-60);
 const c3=mkCld(35,18,-50);
+
+function mvCam(){
+
+const t=document.body.getBoundingClientRect().top;
+
+cam.position.y=10+t*-0.01;
+
+cam.position.z=35+t*-0.005;
+
+}
+
+document.body.onscroll=mvCam;
+
+mvCam();
+
 function anim(){
 
-    requestAnimationFrame(anim);
+requestAnimationFrame(anim);
 
-    c1.position.x += 0.010;
-    c2.position.x += 0.007;
-    c3.position.x += 0.005;
+c1.position.x+=0.010;
+c2.position.x+=0.007;
+c3.position.x+=0.005;
 
-    if(c1.position.x > 45) c1.position.x = -45;
-    if(c2.position.x > 45) c2.position.x = -45;
-    if(c3.position.x > 45) c3.position.x = -45;
+if(c1.position.x>45){
+c1.position.x=-45;
+}
 
-    rndr.render(scn,cam);
+if(c2.position.x>45){
+c2.position.x=-45;
+}
+
+if(c3.position.x>45){
+c3.position.x=-45;
+}
+
+rndr.render(scn,cam);
 
 }
 
@@ -173,18 +342,23 @@ anim();
 
 window.addEventListener("resize",()=>{
 
-    cam.aspect = window.innerWidth/window.innerHeight;
+cam.aspect=window.innerWidth/window.innerHeight;
 
-    cam.updateProjectionMatrix();
+cam.updateProjectionMatrix();
 
-    rndr.setSize(
-        window.innerWidth,
-        window.innerHeight
-    );
+rndr.setSize(
+window.innerWidth,
+window.innerHeight
+);
 
-    rndr.setPixelRatio(
-        window.devicePixelRatio
-    );
+rndr.setPixelRatio(
+window.devicePixelRatio
+);
 
 });
-</script></body></html>
+
+</script>
+
+</body>
+
+</html>
