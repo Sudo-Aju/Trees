@@ -34,27 +34,27 @@ main{
     width:100%;
     display:grid;
     grid-template-columns:repeat(12,1fr);
-    padding:180px 0;
+    padding:120px 0;
 }
 
 header{
     grid-column:2/span 5;
-    background:#111;
-    border:1px solid #444;
-    padding:30px;
+    background:rgba(15,15,15,.95);
+    padding:32px;
     margin-bottom:350px;
 }
 
 section{
     grid-column:2/span 6;
-    background:#111;
-    border:1px solid #444;
-    padding:30px;
+    background:rgba(15,15,15,.95);
+    padding:24px;
     margin-bottom:350px;
+    line-height:1.7;
+    font-size:20px;
 }
 
 .left{
-    grid-column:6/span 5;
+    grid-column:6/span 6;
 }
 
 footer{
@@ -70,6 +70,7 @@ h1{
 
 h2{
     margin-bottom:18px;
+    font-size:34px;
 }
 
 p{
@@ -110,9 +111,8 @@ font-size:40px;
 <h1>knowledge tree</h1>
 
 <p>
-
-knowledge grows like a tree. every generation builds upon the ideas that
-came before it. every discovery becomes part of something much bigger.
+ knowledge grows like a tree. every generation builds upon the ideas that
+  came before it. every discovery becomes part of something much bigger.
 
 </p>
 
@@ -124,8 +124,8 @@ came before it. every discovery becomes part of something much bigger.
 
 <p>
 
-every civilisation starts by asking questions. books and stories become
-the roots of every new discovery.
+ every civilisation starts by asking questions. books and stories become
+ the roots of every new discovery.
 
 </p>
 
@@ -137,8 +137,7 @@ the roots of every new discovery.
 
 <p>
 
-history keeps knowledge alive and supports everything that grows above
-it.
+history keeps knowledge alive and supports everything that grows above it.
 
 </p>
 
@@ -150,8 +149,7 @@ it.
 
 <p>
 
-science maths engineering medicine and art all grow from the same
-foundation.
+science maths engineering medicine and art all grow from the same foundation.
 
 </p>
 
@@ -187,7 +185,9 @@ import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
 
 const scn=new THREE.Scene();
 
-scn.background=new THREE.Color(0x87CEEB);
+scn.background=new THREE.Color(
+0x87CEEB
+);
 
 const cam=new THREE.PerspectiveCamera(
 75,
@@ -196,11 +196,18 @@ window.innerWidth/window.innerHeight,
 1000
 );
 
-cam.position.set(0,10,35);
+cam.position.set(
+0,
+10,
+35
+);
 
 const rndr=new THREE.WebGLRenderer({
+
 canvas:document.querySelector("#bg"),
+
 antialias:true
+
 });
 
 rndr.setSize(
@@ -261,21 +268,21 @@ grnd
 const hill=new THREE.Mesh(
 
 new THREE.CylinderGeometry(
-16,
-20,
-3,
-48
+18,
+24,
+4,
+64
 ),
 
 new THREE.MeshStandardMaterial({
 
-color:0x5B9B45
+color:0x5A9B45
 
 })
 
 );
 
-hill.position.y=-3.5;
+hill.position.y=-3;
 
 scn.add(
 hill
@@ -319,15 +326,16 @@ color:0xffffff
 
 for(let i=0;i<5;i++){
 
-const geo=new THREE.SphereGeometry(
+const sph=new THREE.Mesh(
+
+new THREE.SphereGeometry(
 2+Math.random()*0.5,
 24,
 24
-);
+),
 
-const sph=new THREE.Mesh(
-geo,
 mat
+
 );
 
 sph.position.set(
@@ -376,13 +384,15 @@ const c3=mkCld(
 
 const tree=new THREE.Group();
 
+
+
 const trunk=new THREE.Mesh(
 
 new THREE.CylinderGeometry(
-1.4,
-1.8,
-14,
-24
+1.6,
+2.2,
+16,
+32
 ),
 
 new THREE.MeshStandardMaterial({
@@ -393,21 +403,20 @@ color:0x6B4F2A
 
 );
 
-trunk.position.y=4;
+trunk.position.y=5;
 
 tree.add(
 trunk
 );
-
-for(let i=0;i<6;i++){
+for(let i=0;i<8;i++){
 
 const root=new THREE.Mesh(
 
 new THREE.CylinderGeometry(
-0.18,
-0.45,
-5,
-12
+0.22,
+0.5,
+6,
+16
 ),
 
 new THREE.MeshStandardMaterial({
@@ -418,9 +427,16 @@ color:0x6B4F2A
 
 );
 
-root.position.y=-2;
+const ang=i*Math.PI/4;
 
-root.rotation.z=-1.2+i*0.45;
+root.position.set(
+Math.cos(ang)*1.4,
+-2,
+Math.sin(ang)*1.4
+);
+
+root.rotation.z=Math.cos(ang)*0.9;
+root.rotation.x=Math.sin(ang)*0.5;
 
 tree.add(
 root
@@ -428,51 +444,140 @@ root
 
 }
 
-const tex=new THREE.TextureLoader().load(
+const br1=new THREE.Mesh(
 
-"https://threejs.org/examples/textures/hardwood2_diffuse.jpg"
-
-);
-
-for(let i=0;i<4;i++){
-
-const book=new THREE.Mesh(
-
-new THREE.BoxGeometry(
-1.6,
-0.4,
-2
+new THREE.CylinderGeometry(
+0.45,
+0.8,
+7,
+16
 ),
 
 new THREE.MeshStandardMaterial({
 
-map:tex,
-
-color:0x8B5A2B
+color:0x6B4F2A
 
 })
 
 );
 
-const ang=i*Math.PI/2;
-
-book.position.set(
-Math.cos(ang)*3,
--3.2,
-Math.sin(ang)*3
+br1.position.set(
+0,
+10,
+0
 );
 
-book.rotation.y=ang;
+br1.rotation.z=-0.8;
 
 tree.add(
-book
+br1
+);
+
+const br2=new THREE.Mesh(
+
+new THREE.CylinderGeometry(
+0.45,
+0.8,
+7,
+16
+),
+
+new THREE.MeshStandardMaterial({
+
+color:0x6B4F2A
+
+})
+
+);
+
+br2.position.set(
+0,
+10,
+0
+);
+
+br2.rotation.z=0.8;
+
+tree.add(
+br2
+);
+
+const br3=new THREE.Mesh(
+
+new THREE.CylinderGeometry(
+0.35,
+0.65,
+6,
+16
+),
+
+new THREE.MeshStandardMaterial({
+
+color:0x6B4F2A
+
+})
+
+);
+
+br3.position.set(
+0,
+12,
+0
+);
+
+br3.rotation.x=0.7;
+
+tree.add(
+br3
+);
+
+const leafMat=new THREE.MeshStandardMaterial({
+
+color:0x3D8F2F
+
+});
+
+const leaf=new THREE.Group();
+
+for(let i=0;i<180;i++){
+
+const geo=new THREE.SphereGeometry(
+0.22,
+8,
+8
+);
+
+const sph=new THREE.Mesh(
+geo,
+leafMat
+);
+
+const r=5+Math.random()*2;
+
+const a=Math.random()*Math.PI*2;
+
+const h=Math.random()*5;
+
+sph.position.set(
+Math.cos(a)*r,
+11+h,
+Math.sin(a)*r
+);
+
+leaf.add(
+sph
 );
 
 }
 
+tree.add(
+leaf
+);
+
+
 tree.position.set(
 0,
-0,
+-1,
 0
 );
 
@@ -484,15 +589,62 @@ function mvCam(){
 
 const t=document.body.getBoundingClientRect().top;
 
-cam.position.y=10+t*-0.01;
+cam.position.y=
+10+t*-0.01;
 
-cam.position.z=35+t*-0.005;
+cam.position.z=
+35+t*-0.005;
 
 }
 
-document.body.onscroll=mvCam;
+document.body.onscroll=
+mvCam;
 
 mvCam();
+
+const ideaMat=new THREE.MeshStandardMaterial({
+
+color:0xFFE066
+
+});
+
+const ideas=[];
+
+for(let i=0;i<40;i++){
+
+const idea=new THREE.Mesh(
+
+new THREE.SphereGeometry(
+0.12,
+8,
+8
+),
+
+ideaMat
+
+);
+
+idea.position.set(
+
+(Math.random()-0.5)*10,
+
+10+Math.random()*8,
+
+(Math.random()-0.5)*10
+
+);
+
+idea.userData.off=Math.random()*Math.PI*2;
+
+ideas.push(
+idea
+);
+
+scn.add(
+idea
+);
+
+}
 
 function anim(){
 
@@ -526,11 +678,27 @@ tree.rotation.z=Math.sin(
 Date.now()*0.001
 )*0.02;
 
+for(const idea of ideas){
+
+idea.position.y+=Math.sin(
+
+performance.now()*0.001+
+
+idea.userData.off
+
+)*0.003;
+
+idea.rotation.y+=0.02;
+
+}
+
 sun.rotation.y+=0.002;
 
 rndr.render(
+
 scn,
 cam
+
 );
 
 }
