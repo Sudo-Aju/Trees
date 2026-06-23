@@ -197,9 +197,14 @@ const bark=ldr.load(
 "./Textures/Bark.png"
 );
 
+const leafTex=ldr.load(
+"./textures/leaves.png"
+);
+
 grass.colorSpace=THREE.SRGBColorSpace;
 dirt.colorSpace=THREE.SRGBColorSpace;
 bark.colorSpace=THREE.SRGBColorSpace;
+leafTex.colorSpace=THREE.SRGBColorSpace;
 
 grass.wrapS=THREE.RepeatWrapping;
 grass.wrapT=THREE.RepeatWrapping;
@@ -209,6 +214,9 @@ dirt.wrapT=THREE.RepeatWrapping;
 
 bark.wrapS=THREE.RepeatWrapping;
 bark.wrapT=THREE.RepeatWrapping;
+
+leafTex.wrapS=THREE.RepeatWrapping;
+leafTex.wrapT=THREE.RepeatWrapping;
 
 grass.repeat.set(
 20,
@@ -223,6 +231,11 @@ dirt.repeat.set(
 bark.repeat.set(
 1,
 6
+);
+
+leafTex.repeat.set(
+2,
+2
 );
 
 const scn=new THREE.Scene();
@@ -577,47 +590,81 @@ br3
 
 const leafMat=new THREE.MeshStandardMaterial({
 
-color:0x3D8F2F
+map:leafTex
 
 });
 
 const leaf=new THREE.Group();
 
-for(let i=0;i<180;i++){
+const top1=new THREE.Mesh(
 
-const geo=new THREE.SphereGeometry(
-0.22,
-8,
-8
-);
+new THREE.SphereGeometry(
+4,
+32,
+32
+),
 
-const sph=new THREE.Mesh(
-geo,
 leafMat
+
 );
 
-const r=5+Math.random()*2;
-
-const a=Math.random()*Math.PI*2;
-
-const h=Math.random()*5;
-
-sph.position.set(
-Math.cos(a)*r,
-9+h,
-Math.sin(a)*r
+top1.position.set(
+0,
+12,
+0
 );
 
 leaf.add(
-sph
+top1
 );
 
-}
+const top2=new THREE.Mesh(
+
+new THREE.SphereGeometry(
+3.5,
+32,
+32
+),
+
+leafMat
+
+);
+
+top2.position.set(
+-3,
+10,
+0
+);
+
+leaf.add(
+top2
+);
+
+const top3=new THREE.Mesh(
+
+new THREE.SphereGeometry(
+3.5,
+32,
+32
+),
+
+leafMat
+
+);
+
+top3.position.set(
+3,
+10,
+0
+);
+
+leaf.add(
+top3
+);
 
 tree.add(
 leaf
 );
-
 
 tree.position.set(
 0,
