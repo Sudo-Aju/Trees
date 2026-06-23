@@ -1,6 +1,10 @@
-# Knowledge Tree
+<div align="center">
+    
+# Trees 🌳
 
-An interactive **Three.js** webpage that visualizes the growth of human knowledge through a 3D tree. As users scroll, the camera moves through the scene while animated elements create an immersive storytelling experience. The whole scne is made using grass, dirt, bark, and leaf textures (under CC license), along with dynamic lighting, animated clouds, floating knowledge particles, and subtle tree movement. 
+An interactive **Three.js** webpage that visualizes the growth of human knowledge through a 3D tree. As users scroll, the camera moves through the scene while animated elements create an immersive storytelling experience. The whole scne is made using grass, dirt, bark, and leaf textures (under CC license), along with dynamic lighting, animated clouds, floating knowledge particles, and subtle tree movement. As for me, there weer few challenges like creating a natural looking environment using simple geometric shapes while ensuring textures tiled correctly, animations remained smooth, and the scroll based camera movement felt seamless. The project showcases the use of Three.js for combining 3D graphics with web design to create an engaging and interactive experience.
+
+</div>
 
 ---
 
