@@ -197,25 +197,32 @@ const bark=ldr.load(
 "./Textures/Bark.png"
 );
 
+grass.colorSpace=THREE.SRGBColorSpace;
+dirt.colorSpace=THREE.SRGBColorSpace;
+bark.colorSpace=THREE.SRGBColorSpace;
+
 grass.wrapS=THREE.RepeatWrapping;
 grass.wrapT=THREE.RepeatWrapping;
+
+dirt.wrapS=THREE.RepeatWrapping;
+dirt.wrapT=THREE.RepeatWrapping;
+
+bark.wrapS=THREE.RepeatWrapping;
+bark.wrapT=THREE.RepeatWrapping;
+
 grass.repeat.set(
 20,
 20
 );
 
-dirt.wrapS=THREE.RepeatWrapping;
-dirt.wrapT=THREE.RepeatWrapping;
 dirt.repeat.set(
-4,
-2
+6,
+3
 );
 
-bark.wrapS=THREE.RepeatWrapping;
-bark.wrapT=THREE.RepeatWrapping;
 bark.repeat.set(
 1,
-4
+6
 );
 
 const scn=new THREE.Scene();
@@ -253,6 +260,8 @@ window.innerHeight
 rndr.setPixelRatio(
 window.devicePixelRatio
 );
+
+rndr.outputColorSpace=THREE.SRGBColorSpace;
 
 const ambLt=new THREE.AmbientLight(
 0xffffff,
@@ -311,7 +320,7 @@ new THREE.CylinderGeometry(
 
 new THREE.MeshStandardMaterial({
 
-color:0x5A9B45
+map:dirt
 
 })
 
@@ -432,7 +441,7 @@ new THREE.CylinderGeometry(
 
 new THREE.MeshStandardMaterial({
 
-color:0x6B4F2A
+map:bark
 
 })
 
@@ -456,7 +465,7 @@ new THREE.CylinderGeometry(
 
 new THREE.MeshStandardMaterial({
 
-color:0x6B4F2A
+map:bark
 
 })
 
@@ -497,7 +506,7 @@ map:bark
 );
 
 br1.position.set(
-0,
+2,
 10,
 0
 );
@@ -526,7 +535,7 @@ map:bark
 );
 
 br2.position.set(
-0,
+-2,
 10,
 0
 );
@@ -557,7 +566,7 @@ map:bark
 br3.position.set(
 0,
 12,
-0
+2
 );
 
 br3.rotation.x=0.7;
@@ -595,7 +604,7 @@ const h=Math.random()*5;
 
 sph.position.set(
 Math.cos(a)*r,
-11+h,
+9+h,
 Math.sin(a)*r
 );
 
