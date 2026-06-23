@@ -183,6 +183,41 @@ the tree never stops growing.
 
 import * as THREE from "https://unpkg.com/three@0.165.0/build/three.module.js";
 
+const ldr=new THREE.TextureLoader();
+
+const grass=ldr.load(
+"./textures/grass.jpg"
+);
+
+const dirt=ldr.load(
+"./textures/dirt.jpg"
+);
+
+const bark=ldr.load(
+"./textures/bark.jpg"
+);
+
+grass.wrapS=THREE.RepeatWrapping;
+grass.wrapT=THREE.RepeatWrapping;
+grass.repeat.set(
+20,
+20
+);
+
+dirt.wrapS=THREE.RepeatWrapping;
+dirt.wrapT=THREE.RepeatWrapping;
+dirt.repeat.set(
+4,
+2
+);
+
+bark.wrapS=THREE.RepeatWrapping;
+bark.wrapT=THREE.RepeatWrapping;
+bark.repeat.set(
+1,
+4
+);
+
 const scn=new THREE.Scene();
 
 scn.background=new THREE.Color(
@@ -252,7 +287,7 @@ new THREE.PlaneGeometry(
 
 new THREE.MeshStandardMaterial({
 
-color:0x4CAF50
+map:grass
 
 })
 
@@ -455,7 +490,7 @@ new THREE.CylinderGeometry(
 
 new THREE.MeshStandardMaterial({
 
-color:0x6B4F2A
+map:bark
 
 })
 
@@ -484,7 +519,7 @@ new THREE.CylinderGeometry(
 
 new THREE.MeshStandardMaterial({
 
-color:0x6B4F2A
+map:bark
 
 })
 
@@ -513,7 +548,7 @@ new THREE.CylinderGeometry(
 
 new THREE.MeshStandardMaterial({
 
-color:0x6B4F2A
+map:bark
 
 })
 
