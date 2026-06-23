@@ -40,7 +40,8 @@ An interactive **Three.js** webpage that visualizes the growth of human knowledg
 Trees/
 │
 ├── index.html
-│
+├── README.md
+├── LICENSE
 └── Textures/
     ├── Grass.png
     ├── Dirt.png
