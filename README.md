@@ -2,7 +2,8 @@
     
 # Trees 🌳
 
-An interactive **Three.js** webpage that visualizes the growth of human knowledge through a 3D tree. As users scroll, the camera moves through the scene while animated elements create an immersive storytelling experience. The whole scne is made using grass, dirt, bark, and leaf textures (under CC license), along with dynamic lighting, animated clouds, floating knowledge particles, and subtle tree movement. As for me, there weer few challenges like creating a natural looking environment using simple geometric shapes while ensuring textures tiled correctly, animations remained smooth, and the scroll based camera movement felt seamless. The project showcases the use of Three.js for combining 3D graphics with web design to create an engaging and interactive experience.
+An interactive **Three.js** webpage that visualizes the growth of human knowledge through a 3D tree. As users scroll, the camera moves through the scene while animated elements create an immersive storytelling experience. The whole scne is made using grass, dirt, bark, and leaf textures (under CC license), along with dynamic lighting, animated clouds, floating knowledge particles, and subtle tree movement. 
+## [CLICK ME TO TRY](https://sudo-aju.github.io/Trees/)
 
 </div>
 
@@ -11,6 +12,8 @@ An interactive **Three.js** webpage that visualizes the growth of human knowledg
 ## Preview
 
 <img width="2801" height="1825" alt="Screenshot 2026-06-23 at 11 25 19" src="https://github.com/user-attachments/assets/324ff18b-265f-4b57-95d3-f103375981c2" />
+
+
 
 ---
 
@@ -44,6 +47,12 @@ Trees/
     ├── Bark.png
     └── Leaf.png
 ```
+
+---
+
+## Challenges
+
+As for me, there weer few challenges like creating a natural looking environment using simple geometric shapes while ensuring textures tiled correctly, animations remained smooth, and the scroll based camera movement felt seamless. The project showcases the use of Three.js for combining 3D graphics with web design to create an engaging and interactive experience.
 
 ---
 
